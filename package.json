@@ -1,0 +1,21 @@
+{
+  "name": "crustyjs",
+  "version": "1.0.0",
+  "description": "A simple library to provide error as a value and a rust-like optionality type.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "/dist"
+  ],
+  "author": "ruben-viscomi",
+  "license": "Apache-2.0",
+  "licenses": [
+    {
+      "type": "Apache-2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    }
+  ],
+  "devDependencies": {
+    "typescript": "^5.4.3"
+  }
+}
