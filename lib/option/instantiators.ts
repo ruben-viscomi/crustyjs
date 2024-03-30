@@ -1,3 +1,4 @@
+import { OPTION_FIELD_DISCRIMINATOR, OPTION_NONE, OPTION_SOME, SOME_FIELD_VALUE } from "./constants";
 import { _isNil } from "./guards";
 import { _Option } from "./implementation";
 import { None, Option, Some } from "./types";

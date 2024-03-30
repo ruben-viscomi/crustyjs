@@ -1,3 +1,4 @@
+import { SOME_FIELD_VALUE } from "./constants";
 import { _isNone, _isSome } from "./guards";
 import { Option, _OptionBase } from "./types";
 

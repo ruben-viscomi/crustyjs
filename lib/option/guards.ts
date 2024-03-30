@@ -1,3 +1,4 @@
+import { OPTION_FIELD_DISCRIMINATOR, OPTION_NONE, OPTION_SOME, SOME_FIELD_VALUE } from "./constants";
 import { None, Some } from "./types";
 
 export function _isNil(value: unknown): value is undefined | null {
