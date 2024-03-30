@@ -25,6 +25,11 @@ describe("Option creation from null values", () => {
             expect(option<string>(value).unwrapOr("expected string")).toBe("expected string");
         })
     });
+
+    it(`should create an Option wrapping a None when no value is provided`, () => {
+        expect(option()).toStrictEqual(none());
+    })
+
 });
 
 describe("Option creation from defined values", () => {

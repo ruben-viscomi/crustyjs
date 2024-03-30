@@ -7,7 +7,7 @@ function _option<T>(value: Some<T> | None): Option<T> {
     return new _Option<T>(value);
 }
 
-export function option<T>(value: T | null | undefined): Option<T> {
+export function option<T>(value?: T | null | undefined): Option<T> {
     return _isNil(value)
         ? none()
         : some(value);
