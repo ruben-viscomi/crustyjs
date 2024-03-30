@@ -18,7 +18,7 @@ describe("Option creation from null values", () => {
         })
 
         it("cannot be unwrapped", () => {            
-            expect(option(value).unwrap).toThrow(Error);
+            expect(() => option(value).unwrap()).toThrow(Error);
         })
 
         it("can unwrap with a fallback", () => {            
