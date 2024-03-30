@@ -1,2 +1,2 @@
 export { Result, Ok, Err } from "./types";
-export { ok, err } from "./instantiators";
+export { ok, err, throwableAsyncToResult, throwableToResult } from "./instantiators";

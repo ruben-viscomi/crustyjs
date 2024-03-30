@@ -1,2 +1,2 @@
 export { Option, Some, None } from "./types";
-export { some, none } from "./instantiators";
+export { option, some, none } from "./instantiators";
