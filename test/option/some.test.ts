@@ -4,7 +4,7 @@ import { option, some } from "../../lib";
 describe("Some creation from null values", () => {
     [null, undefined].forEach((value) => {
         it("should not be possible to instantiate Some", () => {
-            expect(() => some(value)).toThrow(Error)
+            expect(() => some(value)).toThrow(TypeError)
         })
     })
 });

@@ -5,7 +5,7 @@ function promiseFunction<T>(value: T) {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             if (value === "reject")
-                reject(new Error("the promise has been rejected."));
+                reject(new TypeError("the promise has been rejected."));
             else
                 resolve(value);
         }, 1000)
@@ -16,7 +16,7 @@ function promiseFunction<T>(value: T) {
 async function awaitableFunction<T>(value: T) {
     await promiseFunction(value);
     if (value === "throw")
-        throw Error("an error has been thrown");
+        throw TypeError("an error has been thrown");
     return value;
 }
 
@@ -29,12 +29,12 @@ describe("conversion from a promise function to Result", () => {
 
     it.concurrent("should instantiate an Err if the function throws an error", async () => {
         expect(await throwableAsyncToResult(() => promiseFunction("reject")))
-            .toStrictEqual(err(new Error("the promise has been rejected.")));
+            .toStrictEqual(err(new TypeError("the promise has been rejected.")));
     })
 
     it.concurrent("should instantiate an Err if the async function rejects", async () => {
         const converter = (e: unknown) => {
-            if (e instanceof Error)
+            if (e instanceof TypeError)
                 return e.message;
             return "";
         }
@@ -52,17 +52,17 @@ describe("conversion from an async function to Result", () => {
 
     it.concurrent("should instantiate an Err if the function throws an error", async () => {
         expect(await throwableAsyncToResult(() => awaitableFunction("throw")))
-            .toStrictEqual(err(Error("an error has been thrown")));
+            .toStrictEqual(err(TypeError("an error has been thrown")));
     })
 
     it.concurrent("should instantiate an Err if the function throws an error", async () => {
         expect(await throwableAsyncToResult(() => awaitableFunction("reject")))
-            .toStrictEqual(err(Error("the promise has been rejected.")));
+            .toStrictEqual(err(TypeError("the promise has been rejected.")));
     })
 
     it.concurrent("should instantiate an Err if the async function rejects", async () => {
         const converter = (e: unknown) => {
-            if (e instanceof Error)
+            if (e instanceof TypeError)
                 return e.message;
             return "";
         }
@@ -73,7 +73,7 @@ describe("conversion from an async function to Result", () => {
 
     it.concurrent("should instantiate an Err if the async function rejects", async () => {
         const converter = (e: unknown) => {
-            if (e instanceof Error)
+            if (e instanceof TypeError)
                 return e.message;
             return "";
         }

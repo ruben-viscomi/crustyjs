@@ -18,7 +18,7 @@ export class _Option<T> implements Option<T> {
     unwrap(): T {
         if (_isSome<T>(this._value))
             return this._value[SOME_FIELD_VALUE];
-        throw Error("Cannot `unwrap` a `None`");
+        throw TypeError("Cannot `unwrap` a `None`");
     }
 
     unwrapOr(value: T): T {

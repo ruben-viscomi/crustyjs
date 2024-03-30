@@ -24,7 +24,7 @@ describe("Match a Some", () => {
         [], [1, 2, 3], ["a", "b", "c"] as const,
         false, true,
         new Promise((resolve) => resolve(undefined)),
-        () => {}, () => { throw Error("error") },
+        () => {}, () => { throw TypeError("error") },
         JSON
     ];
 

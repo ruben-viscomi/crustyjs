@@ -11,7 +11,7 @@ describe("Ok creation", () => {
         [], [1, 2, 3], ["a", "b", "c"] as const,
         false, true,
         new Promise((resolve) => resolve(undefined)),
-        () => {}, () => { throw Error("error") },
+        () => {}, () => { throw TypeError("error") },
         JSON
     ];
 
@@ -29,7 +29,7 @@ describe("Ok creation", () => {
         })
 
         it(`an Ok cannot unwrap an error`, () => {
-            expect(() => ok(value).unwrapErr()).toThrow(Error);
+            expect(() => ok(value).unwrapErr()).toThrow(TypeError);
         })
 
         it(`an Ok won't unwrap using the fallback`, () => {

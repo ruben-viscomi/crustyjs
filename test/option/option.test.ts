@@ -18,7 +18,7 @@ describe("Option creation from null values", () => {
         })
 
         it("cannot be unwrapped", () => {            
-            expect(() => option(value).unwrap()).toThrow(Error);
+            expect(() => option(value).unwrap()).toThrow(TypeError);
         })
 
         it("can unwrap with a fallback", () => {            
@@ -40,7 +40,7 @@ describe("Option creation from defined values", () => {
         [], [1, 2, 3], ["a", "b", "c"] as const,
         false, true,
         new Promise((resolve) => resolve(undefined)),
-        () => {}, () => { throw Error("error") },
+        () => {}, () => { throw TypeError("error") },
         JSON
     ];
     

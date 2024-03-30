@@ -18,7 +18,7 @@ export class _Result<T, E> implements Result<T, E> {
     unwrap(): T {
         if (_isOk<T>(this._value))
             return this._value[OK_FIELD_VALUE];
-        throw Error("Cannot `unwrap` an `Err`.");
+        throw TypeError("Cannot `unwrap` an `Err`.");
     }
 
     unwrapOr(value: T): T {
@@ -30,7 +30,7 @@ export class _Result<T, E> implements Result<T, E> {
     unwrapErr(): E {
         if (_isErr<E>(this._value))
             return this._value[ERR_FIELD_VALUE];
-        throw Error ("Cannot `unwrapErr` an `Ok`");
+        throw TypeError ("Cannot `unwrapErr` an `Ok`");
     }
 
     isOk(): boolean {

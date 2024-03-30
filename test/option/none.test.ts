@@ -15,7 +15,7 @@ describe("None creation", () => {
     })
 
     it(`can't be unwrapped`, () => {            
-        expect(() => none().unwrap()).toThrow(Error);
+        expect(() => none().unwrap()).toThrow(TypeError);
     })
 
     it(`can be unwrapped with fallback`, () => {            

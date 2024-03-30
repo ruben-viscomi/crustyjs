@@ -21,7 +21,7 @@ export function none<T>(): Option<T> {
 
 export function some<T>(value: T): Option<T> {
     if (_isNil(value))
-        throw Error("Some must be a non null value.");
+        throw TypeError("Some must be a non null value.");
 
     return _option({
         [SOME_FIELD_VALUE]: value,

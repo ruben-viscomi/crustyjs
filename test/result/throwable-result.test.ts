@@ -3,7 +3,7 @@ import { err, throwableToResult, ok } from "../../lib";
 
 function throwableFunction<T>(value: T) {
     if (value === "throw")
-        throw Error("an error has been thrown");
+        throw TypeError("an error has been thrown");
     return value;
 }
 
@@ -16,12 +16,12 @@ describe("conversion from throwable to Result", () => {
 
     it("should instantiate an Err if the function throws an error", () => {
         expect(throwableToResult(() => throwableFunction("throw")))
-            .toStrictEqual(err(new Error("an error has been thrown")));
+            .toStrictEqual(err(new TypeError("an error has been thrown")));
     })
 
     it("should instantiate an Err of type string if the function throws an error and a converter to string is provided", () => {
         const converter = (e: unknown) => {
-            if (e instanceof Error)
+            if (e instanceof TypeError)
                 return e.message;
             return "";
         }
