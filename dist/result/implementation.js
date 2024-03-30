@@ -15,7 +15,7 @@ class _Result {
     unwrap() {
         if ((0, guards_1._isOk)(this._value))
             return this._value[constants_1.OK_FIELD_VALUE];
-        throw Error("Cannot `unwrap` an `Err`.");
+        throw TypeError("Cannot `unwrap` an `Err`.");
     }
     unwrapOr(value) {
         return (0, guards_1._isOk)(this._value)
@@ -25,7 +25,7 @@ class _Result {
     unwrapErr() {
         if ((0, guards_1._isErr)(this._value))
             return this._value[constants_1.ERR_FIELD_VALUE];
-        throw Error("Cannot `unwrapErr` an `Ok`");
+        throw TypeError("Cannot `unwrapErr` an `Ok`");
     }
     isOk() {
         return (0, guards_1._isOk)(this._value);

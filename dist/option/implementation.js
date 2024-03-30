@@ -15,7 +15,7 @@ class _Option {
     unwrap() {
         if ((0, guards_1._isSome)(this._value))
             return this._value[constants_1.SOME_FIELD_VALUE];
-        throw Error("Cannot `unwrap` a `None`");
+        throw TypeError("Cannot `unwrap` a `None`");
     }
     unwrapOr(value) {
         return (0, guards_1._isSome)(this._value)

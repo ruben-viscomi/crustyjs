@@ -20,6 +20,8 @@ function none() {
 }
 exports.none = none;
 function some(value) {
+    if ((0, guards_1._isNil)(value))
+        throw TypeError("Some must be a non null value.");
     return _option({
         [constants_1.SOME_FIELD_VALUE]: value,
         [constants_1.OPTION_FIELD_DISCRIMINATOR]: constants_1.OPTION_SOME,
