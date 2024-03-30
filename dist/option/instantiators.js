@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.some = exports.none = exports.option = void 0;
+const constants_1 = require("./constants");
 const guards_1 = require("./guards");
 const implementation_1 = require("./implementation");
 function _option(value) {
@@ -14,14 +15,14 @@ function option(value) {
 exports.option = option;
 function none() {
     return _option({
-        [OPTION_FIELD_DISCRIMINATOR]: OPTION_NONE,
+        [constants_1.OPTION_FIELD_DISCRIMINATOR]: constants_1.OPTION_NONE,
     });
 }
 exports.none = none;
 function some(value) {
     return _option({
-        [SOME_FIELD_VALUE]: value,
-        [OPTION_FIELD_DISCRIMINATOR]: OPTION_SOME,
+        [constants_1.SOME_FIELD_VALUE]: value,
+        [constants_1.OPTION_FIELD_DISCRIMINATOR]: constants_1.OPTION_SOME,
     });
 }
 exports.some = some;

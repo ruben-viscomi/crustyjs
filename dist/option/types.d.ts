@@ -1,3 +1,4 @@
+import { OPTION_FIELD_DISCRIMINATOR, OPTION_NONE, OPTION_SOME, OPTION_TYPES, SOME_FIELD_VALUE } from "./constants";
 export type _OptionType = typeof OPTION_TYPES[number];
 export interface _OptionBase {
     [OPTION_FIELD_DISCRIMINATOR]: _OptionType;

@@ -1,6 +1,8 @@
 "use strict";
-const OPTION_NONE = "NONE";
-const OPTION_SOME = "SOME";
-const OPTION_TYPES = [OPTION_NONE, OPTION_SOME];
-const OPTION_FIELD_DISCRIMINATOR = "_optionType";
-const SOME_FIELD_VALUE = "_value";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.SOME_FIELD_VALUE = exports.OPTION_FIELD_DISCRIMINATOR = exports.OPTION_TYPES = exports.OPTION_SOME = exports.OPTION_NONE = void 0;
+exports.OPTION_NONE = "NONE";
+exports.OPTION_SOME = "SOME";
+exports.OPTION_TYPES = [exports.OPTION_NONE, exports.OPTION_SOME];
+exports.OPTION_FIELD_DISCRIMINATOR = "_optionType";
+exports.SOME_FIELD_VALUE = "_value";
