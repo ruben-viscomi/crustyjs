@@ -42,7 +42,7 @@ export function err<T, E>(value: E): Result<T, E> {
  * @param converter (optional) function to convert the thrown type to `E`, if not provided `E = unknown`.
  * @returns an instance of {@link Err} if `throwable` throws an error, {@link Ok} otherwise.
  */
-export function toResult<T>(throwable: () => T): Result<T, unknown>;
+export function toResult<T, E = unknown>(throwable: () => T): Result<T, E>;
 export function toResult<T, E>(throwable: () => T, converter: (error: unknown) => E): Result<T, E>;
 export function toResult<T, E = unknown>(throwable: () => T, converter?: (error: unknown) => E) {
     try {
@@ -60,7 +60,7 @@ export function toResult<T, E = unknown>(throwable: () => T, converter?: (error:
  * @param converter (optional) function to convert the thrown type to `E`, if not provided `E = unknown`.
  * @returns a {@link Promise} wrapping an instance of {@link Err} if `throwable` throws an error, {@link Ok} otherwise.
  */
-export async function toResultAsync<T>(throwable: () => Promise<T>): Promise<Result<T, unknown>>
+export async function toResultAsync<T, E = unknown>(throwable: () => Promise<T>): Promise<Result<T, E>>
 export async function toResultAsync<T, E>(throwable: () => Promise<T>, converter: (error: unknown) => E): Promise<Result<T, E>>
 export async function toResultAsync<T, E = unknown>(throwable: () => Promise<T>, converter?: (error: unknown) => E) {
     try {
