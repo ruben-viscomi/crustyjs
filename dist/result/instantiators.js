@@ -15,6 +15,11 @@ const constants_1 = require("./constants");
 function _result(value) {
     return new implementation_1._Result(value);
 }
+/**
+ * Wraps the value `T` inside an {@link Ok}.
+ * @param value any value.
+ * @returns an instance of {@link Ok}.
+ */
 function ok(value) {
     return _result({
         [constants_1.OK_FIELD_VALUE]: value,
@@ -22,6 +27,11 @@ function ok(value) {
     });
 }
 exports.ok = ok;
+/**
+ * Wraps the value `E` inside an {@link Err}.
+ * @param value any value.
+ * @returns an instance of {@link Err}.
+ */
 function err(value) {
     return _result({
         [constants_1.ERR_FIELD_VALUE]: value,
