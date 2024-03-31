@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { err, throwableToResult, ok } from "../../lib";
+import { err, toResult, ok } from "../../lib";
 
 function throwableFunction<T>(value: T) {
     if (value === "throw")
@@ -10,12 +10,12 @@ function throwableFunction<T>(value: T) {
 
 describe("conversion from throwable to Result", () => {
     it("should instantiate an Ok if the function doesn't throw errors", () => {
-        expect(throwableToResult(() => throwableFunction(123)))
+        expect(toResult(() => throwableFunction(123)))
             .toStrictEqual(ok(123));
     })
 
     it("should instantiate an Err if the function throws an error", () => {
-        expect(throwableToResult(() => throwableFunction("throw")))
+        expect(toResult(() => throwableFunction("throw")))
             .toStrictEqual(err(new TypeError("an error has been thrown")));
     })
 
@@ -26,7 +26,7 @@ describe("conversion from throwable to Result", () => {
             return "";
         }
 
-        expect(throwableToResult(() => throwableFunction("throw"), converter))
+        expect(toResult(() => throwableFunction("throw"), converter))
             .toStrictEqual(err("an error has been thrown"));
     })
 })

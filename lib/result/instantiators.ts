@@ -26,9 +26,9 @@ export function err<T, E>(value: E): Result<T, E> {
     });
 }
 
-export function throwableToResult<T>(throwable: () => T): Result<T, unknown>;
-export function throwableToResult<T, E>(throwable: () => T, converter: (error: unknown) => E): Result<T, E>;
-export function throwableToResult<T, E = unknown>(throwable: () => T, converter?: (error: unknown) => E) {
+export function toResult<T>(throwable: () => T): Result<T, unknown>;
+export function toResult<T, E>(throwable: () => T, converter: (error: unknown) => E): Result<T, E>;
+export function toResult<T, E = unknown>(throwable: () => T, converter?: (error: unknown) => E) {
     try {
         return ok(throwable())
     } catch (error) {
@@ -38,9 +38,9 @@ export function throwableToResult<T, E = unknown>(throwable: () => T, converter?
     }
 }
 
-export async function throwableAsyncToResult<T>(throwable: () => Promise<T>): Promise<Result<T, unknown>>
-export async function throwableAsyncToResult<T, E>(throwable: () => Promise<T>, converter: (error: unknown) => E): Promise<Result<T, E>>
-export async function throwableAsyncToResult<T, E = unknown>(throwable: () => Promise<T>, converter?: (error: unknown) => E) {
+export async function toResultAsync<T>(throwable: () => Promise<T>): Promise<Result<T, unknown>>
+export async function toResultAsync<T, E>(throwable: () => Promise<T>, converter: (error: unknown) => E): Promise<Result<T, E>>
+export async function toResultAsync<T, E = unknown>(throwable: () => Promise<T>, converter?: (error: unknown) => E) {
     try {
         return ok(await throwable());
     } catch (error) {
