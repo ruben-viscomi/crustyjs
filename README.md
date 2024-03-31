@@ -6,61 +6,95 @@ The main motivation is to bring an "interface" to allow both TypeScript and Java
 The second motivation is to make an attempt to avoid the confusion deriving from `undefined` and `null` by using "struct-like" type (aka `Option`).\
 For this last one, the idea is to simply avoid `undefined` and `null`.
 
-## `Result`
-```typescript
-import { Result, err, ok } from "crustyjs";
+## Errors as values, the `Result` type.
+### How to instantiate a `Result`?
+1. **Quick 'n dirty** - By derivation, passing a function that throws:
+    ```typescript
+    import { Result, toResult } from "crustyjs";
+    
+    function isEvenOrThrow(n: number): number {
+        if (n % 2 === 0)
+            return n;
+        throw Error(`${n} is not even.`);
+    }
+    
+    function isEvenOrErr(n: number): Result<number, Error> {
+        return toResult(() => isEvenOrThrow(n));
+    }
+    
+    // returns Ok<number>
+    isEvenOrErr(0);
+    
+    // returns Err<Error>
+    isEvenOrErr(1);
+    
+    // returns Ok<number>
+    isEvenOrErr(2);
+    ```
+    The same can be done for `async` functions by using `toResultAsync`.
 
-// Example function returning a Result
-function oddOrErr(num: number): Result<number, string> {
-    if (num % 2 == 0)
-        return err(`${num} is not odd`);
-    return ok(num);
-}
+2. **Slow 'n clean** - By manually rewriting the functions:
+    ```typescript
+    import { Result, err, ok } from "crustyjs";
+    
+    function isEvenOrErr(n: number): Result<number, string> {
+        if (n % 2 === 0)
+            return ok(n);
+        return err(`${n} is not even.`);
+    }
+    
+    // returns Ok<number>
+    isEvenOrErr(0);
+    
+    // returns Err<string>
+    isEvenOrErr(1);
+    
+    // returns Ok<number>
+    isEvenOrErr(2);
+    ```
 
-// ===================== Result is Ok ===================== //
-const anOk = oddOrErr(3);
+### How to consume a `Result`?
+1. **Recommended** - Using the built-in pattern matching:
+    ```typescript
+    import { err, ok } from "crustyjs";
+    
+    // returns the string "Ok(ok branch gets executed)"
+    ok("ok branch gets executed").match(
+        (val) => `Ok(${val})`,
+        (err) => `Err(${err})`,
+    );
+    
+    // returns the string "Err(err branch gets executed)"
+    err("err branch gets executed").match(
+        (val) => `Ok(${val})`,
+        (err) => `Err(${err})`,
+    );
+    ```
+    A `string` is returned beacuse the provided handlers are returning a `string`.
 
-// The (num) => `${num} is odd` branch is executed, thus returning "3 is odd"
-anOk.match(
-    (num) => `${num} is odd`,
-    (error) => error,
-);
-// false
-anOk.isErr();
+2. The `unwrapOr` and `unwrap`:
+    ```typescript
+    import { err, ok, Result } from "crustyjs";
 
-// true
-anOk.isOk();
+    const testOk: Result<number, string> = ok(5);
+    const testErr: Result<number, string> = err("some error");
 
-// returns 3
-anOk.unwrap();
+    // returns 5
+    testOk.unwrapOr(3);
+    
+    // returns 3
+    testErr.unwrapOr(3);
 
-// returns 3
-anOk.unwrapOr(5);
+    // since testOk is Ok, returns 5
+    if (testOk.isOk())
+        testOk.unwrap();
 
-// throws a TypeError, because the instance is Ok. (Consider it as a panic, if it happens your code is not properly handling the Result.)
-anOk.unwrapErr();
+    // since testErr is Err, it never executes the unwrap.
+    if (testErr.isOk())
+        testErr.unwrap();
 
-// ===================== Result is Err ===================== //
-const anErr = oddOrErr(2);
-
-// The (error) => error branch is executed, thus returning "2 is not odd"
-anErr.match(
-    (num) => `${num} is odd`,
-    (error) => error,
-);
-
-// true
-anErr.isErr();
-
-// false
-anErr.isOk();
-
-// throws a TypeError, because the instance is Err. (Consider it as a panic, if it happens your code is not properly handling the Result.)
-anErr.unwrap();
-
-// returns 5
-anErr.unwrapOr(5);
-
-// returns "2 is not odd"
-anErr.unwrapErr();
-```
+    // BAD UNWRAPS - the line below throws a type error because testErr is of type Err.
+    testErr.unwrap()
+    ```
+    Similar to `unwrap` it is possible to just unwrap the Err `unwrapErr` (no method like "unwrapErrOr" exists).\
+   When using `unwrap` or `unwrapErr`, please always remember to check the type.
