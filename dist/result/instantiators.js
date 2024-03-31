@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.throwableAsyncToResult = exports.throwableToResult = exports.err = exports.ok = void 0;
+exports.toResultAsync = exports.toResult = exports.err = exports.ok = void 0;
 const implementation_1 = require("./implementation");
 const constants_1 = require("./constants");
 function _result(value) {
@@ -29,7 +29,7 @@ function err(value) {
     });
 }
 exports.err = err;
-function throwableToResult(throwable, converter) {
+function toResult(throwable, converter) {
     try {
         return ok(throwable());
     }
@@ -39,8 +39,8 @@ function throwableToResult(throwable, converter) {
             : err(error);
     }
 }
-exports.throwableToResult = throwableToResult;
-function throwableAsyncToResult(throwable, converter) {
+exports.toResult = toResult;
+function toResultAsync(throwable, converter) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             return ok(yield throwable());
@@ -52,4 +52,4 @@ function throwableAsyncToResult(throwable, converter) {
         }
     });
 }
-exports.throwableAsyncToResult = throwableAsyncToResult;
+exports.toResultAsync = toResultAsync;
