@@ -32,8 +32,11 @@ For this last one, the idea is to simply avoid `undefined` and `null`.
     isEvenOrErr(2);
     ```
     The same can be done for `async` functions by using `toResultAsync`.
+   
+   Please note that it is also possible to provide as second parameter a type converter for the `Err`.\
+   If provided, the converter must accept the error as an `unknown` parameter and transform it into the desired type `E`.
 
-2. **Slow 'n clean** - By manually rewriting the functions:
+3. **Slow 'n clean** - By manually rewriting the functions:
     ```typescript
     import { Result, err, ok } from "crustyjs";
     
