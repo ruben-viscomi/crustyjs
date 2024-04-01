@@ -12,24 +12,24 @@ For this last one, the idea is to simply avoid `undefined` and `null`.
     ```typescript
     import { Result, toResult } from "crustyjs";
     
-    function isEvenOrThrow(n: number): number {
+    function evenOrThrow(n: number): number {
         if (n % 2 === 0)
             return n;
         throw Error(`${n} is not even.`);
     }
     
-    function isEvenOrErr(n: number): Result<number, Error> {
-        return toResult(() => isEvenOrThrow(n));
+    function evenOrErr(n: number): Result<number, Error> {
+        return toResult(() => evenOrThrow(n));
     }
     
     // returns Ok<number>
-    isEvenOrErr(0);
+    evenOrErr(0);
     
     // returns Err<Error>
-    isEvenOrErr(1);
+    evenOrErr(1);
     
     // returns Ok<number>
-    isEvenOrErr(2);
+    evenOrErr(2);
     ```
     The same can be done for `async` functions by using `toResultAsync`.
    
@@ -40,20 +40,20 @@ For this last one, the idea is to simply avoid `undefined` and `null`.
     ```typescript
     import { Result, err, ok } from "crustyjs";
     
-    function isEvenOrErr(n: number): Result<number, string> {
+    function evenOrErr(n: number): Result<number, string> {
         if (n % 2 === 0)
             return ok(n);
         return err(`${n} is not even.`);
     }
     
     // returns Ok<number>
-    isEvenOrErr(0);
+    evenOrErr(0);
     
     // returns Err<string>
-    isEvenOrErr(1);
+    evenOrErr(1);
     
     // returns Ok<number>
-    isEvenOrErr(2);
+    evenOrErr(2);
     ```
 
 ### How to consume a `Result`?
@@ -99,5 +99,5 @@ For this last one, the idea is to simply avoid `undefined` and `null`.
     // BAD UNWRAPS - the line below throws a type error because testErr is of type Err.
     testErr.unwrap()
     ```
-    Similar to `unwrap` it is possible to just unwrap the Err `unwrapErr` (no method like "unwrapErrOr" exists).\
+    Similar to `unwrap` it is possible to just unwrap the `Err` by using `unwrapErr` (no method like "unwrapErrOr" exists).\
    When using `unwrap` or `unwrapErr`, please always remember to check the type.
