@@ -1,6 +1,6 @@
 {
   "name": "crustyjs",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple library to provide error as a value and a rust-like optionality type.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -15,6 +15,11 @@
       "url": "http://www.apache.org/licenses/LICENSE-2.0"
     }
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ruben-viscomi/crustyjs"
+  },
+  "keywords": ["pattern matching", "option", "error handling", "rust", "lib"],
   "devDependencies": {
     "@vitest/coverage-v8": "^1.4.0",
     "typescript": "^5.4.3",
